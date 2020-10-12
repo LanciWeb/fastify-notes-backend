@@ -2,6 +2,7 @@ const fastify = require('fastify');
 const app = fastify();
 const mongoose = require('mongoose');
 const noteRoutes = require('./routes/noteRoutes');
+const contentRangeHook = require('./hooks/contentRangeHook');
 
 try {
   mongoose.connect('mongodb://localhost:27017/notes_db', {
@@ -12,6 +13,7 @@ try {
   console.error(e);
 }
 
+app.addHook('preHandler', contentRangeHook);
 noteRoutes(app);
 
 app.listen(5000, (err, address) => {
