@@ -39,7 +39,8 @@ module.exports = {
       const noteId = request.params.id;
       const updates = request.body;
       await Note.findByIdAndUpdate(noteId, updates);
-      reply.code(200).send();
+      const noteToUpdate = await Note.findById(noteId);
+      reply.code(200).send({ data: noteToUpdate });
     } catch (e) {
       reply.code(500).send(e);
     }
@@ -49,8 +50,9 @@ module.exports = {
   delete: async (request, reply) => {
     try {
       const noteId = request.params.id;
+      const noteToDelete = await Note.findById(noteId);
       await Note.findByIdAndDelete(noteId);
-      reply.code(200).send();
+      reply.code(200).send({ data: noteToDelete });
     } catch (e) {
       reply.code(500).send(e);
     }
