@@ -1,6 +1,7 @@
 const fastify = require('fastify');
 const app = fastify();
 const mongoose = require('mongoose');
+const noteRoutes = require('./routes/noteRoutes');
 
 try {
   mongoose.connect('mongodb://localhost:27017/notes_db', {
@@ -11,9 +12,7 @@ try {
   console.error(e);
 }
 
-app.get('/', (request, reply) => {
-  reply.send('Ok, funziona tutto!');
-});
+noteRoutes(app);
 
 app.listen(3000, (err, address) => {
   if (err) {
