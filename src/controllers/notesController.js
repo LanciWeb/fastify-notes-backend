@@ -34,7 +34,16 @@ module.exports = {
   },
 
   //#update a note
-  update: async (request, reply) => {},
+  update: async (request, reply) => {
+    try {
+      const noteId = request.params.id;
+      const updates = request.body;
+      await Note.findByIdAndUpdate(noteId, updates);
+      reply.code(200).send();
+    } catch (e) {
+      reply.code(500).send(e);
+    }
+  },
 
   //#delete a note
   delete: async (request, reply) => {},
