@@ -14,7 +14,7 @@ try {
 
 noteRoutes(app);
 
-app.listen(3000, (err, address) => {
+app.listen(5000, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
