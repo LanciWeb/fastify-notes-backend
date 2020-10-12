@@ -1,5 +1,15 @@
 const fastify = require('fastify');
 const app = fastify();
+const mongoose = require('mongoose');
+
+try {
+  mongoose.connect('mongodb://localhost:27017/notes_db', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+} catch (e) {
+  console.error(e);
+}
 
 app.get('/', (request, reply) => {
   reply.send('Ok, funziona tutto!');
