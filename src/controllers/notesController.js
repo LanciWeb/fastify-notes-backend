@@ -46,5 +46,13 @@ module.exports = {
   },
 
   //#delete a note
-  delete: async (request, reply) => {},
+  delete: async (request, reply) => {
+    try {
+      const noteId = request.params.id;
+      await Note.findByIdAndDelete(noteId);
+      reply.code(200).send();
+    } catch (e) {
+      reply.code(500).send(e);
+    }
+  },
 };
